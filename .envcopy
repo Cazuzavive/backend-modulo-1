@@ -1,0 +1,4 @@
+MONGODB_URLSTRING = mongodb+srv://nefertaritheunique:vDB1mch6GUxIiZH8@dumpling.8dhyf0a.mongodb.net/?retryWrites=true&w=majority&appName=dumpling
+PORT = 3000
+DATABASE_NAME = Productos
+COLLECTION_NAME = Electronicos
