@@ -5,10 +5,10 @@ http://localhost:3000
 GET http://localhost:3000/electronicos
 
 ### Mostrar los productos de una categoria
-GET http://localhost:3000/electronicos/Línea blanca
+GET http://localhost:3000/electronicos/categorias/Hogar
 
 ### Mostrar un producto por id
-GET http://localhost:3000/electronicos/667dc1dd77b70f342b0759aa
+GET http://localhost:3000/electronicos/6679dba4bdcfc3e1a47a9472
 
 
 ### Crear un producto
@@ -16,10 +16,10 @@ POST http://localhost:3000/electronicos/
 Content-Type: application/json
 
 {
-    "codigo": 57,
-    "nombre": "Tablet 5ZCX",
-    "precio": 3000,
-    "categorias": "Electronicos"
+    "codigo": 58,
+    "nombre": "Telefono",
+    "precio": 3060,
+    "categorias": "Electronica"
 }
 
 ### Actualizar un producto parcialmente
@@ -35,26 +35,23 @@ PUT http://localhost:3000/electronicos/667dc1dd77b70f342b0759aa
 content-type: application/json
 
 {
-    "codigo": "hf",
+    "codigo": "60",
     "nombre": "Tablet SD87",
     "precio": 300000,
     "categorias": "Tablet"
 }
 
 ### Borrar un producto  
-DELETE http://localhost:3000/electronicos/667dc19277b70f342b0759a7
+DELETE http://localhost:3000/electronicos/6688621eeefa83b6ecfec266
 
 ### Mostrar producto por nombre especifico
 GET http://localhost:3000/electronicos/nombre/Router WiFi
 
 ### Mostrar producto por codigo especifico
-GET http://localhost:3000/electronicos/codigo/25
+GET http://localhost:3000/electronicos/codigo/27
 
-### Mostrar producto con importe mayor al especificado
+### Mostrar producto con precio mayor al especificado
 GET http://localhost:3000/electronicos/precio/mayor/300
 
 ### Mostrar productos con importe menor al especificado
 GET http://localhost:3000/electronicos/precio/menor/300
-
-### Mostrar todas las categorias disponibles
-GET http://localhost:3000/electronicos/categorias

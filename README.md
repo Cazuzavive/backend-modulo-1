@@ -18,7 +18,7 @@ Este proyecto implementa una API RESTful para la gestión de productos electroni
 3. Instalar dependencias:
    npm install express mongoose dotenv morgan
 4. Configuración de la base de datos:
-   Asegúrate de tener una instancia de MongoDB en ejecución. Puedes configurar la conexión en el archivo database.js.
+   La configuracion de la conexión a la base de datos mondoDB esta en el archivo database.js.
 5. Ejecutar la aplicación:
    npm start
    La aplicación estará disponible en [http://localhost:3000].
@@ -28,31 +28,30 @@ Endpoints
 * GET /electronicos
   Devuelve todos los productos.
   GET [http://localhost:3000/electronicos](http://localhost:3000/electronicos)
-
  
+* GET /electronicos/categorias/:categoria
+Devuelve todos los productos de una categoría.
+GET [http://localhost:3000/electronicos/categoria/:categoria](http://localhost:3000/electronicos/Hogar)
+
 * GET /electronicos/
   Devuelve un producto por su ID.
-  GET [http://localhost:3000/productos/:id](http://localhost:3000/electronicos/667dc1dd77b70f342b0759aa)
-
-* GET /electronicos/categoria/
-Devuelve todos los productos de una categoría.
-GET [http://localhost:3000/electronicos/categoria/:categoria](http://localhost:3000/electronicos/Línea blanca)
+  GET [http://localhost:3000/electronicos/:id](http://localhost:3000/electronicos/667dc1dd77b70f342b0759aa)
 
 * POST /electronicos/
   Crea un nuevo producto.
-  POST [http://localhost:3000/productos](http://localhost:3000/productos)
+  POST [http://localhost:3000/electronicos/](http://localhost:3000/electronicos/)
   Content-Type: application/json
   {
     "codigo": "codigo"
   "nombre": "Nuevo Producto",
   "precio": 399.99,
-  "categoria": "Electrónicos"
+  "categoria": "Electrónica"
   
   }
 
 * PATCH /electronicos/
   Actualiza parcialmente un producto por su ID.
-  PATCH [http://localhost:3000/electronicos/:id](http://localhost:3000/electronicos/667dc1dd77b70f342b0759aa)
+  PATCH [http://localhost:3000/electronicos/:id](http://localhost:3000/electronicos/67dc1dd77b70f342b0759aa)
   Content-Type: application/json
   {
   "precio": 449.99
@@ -60,18 +59,18 @@ GET [http://localhost:3000/electronicos/categoria/:categoria](http://localhost:3
 
 * PUT /electronicos/
   Actualiza completamente un producto por su ID.
-  PUT [http://localhost:3000/electronicos/:id](http://localhost:3000/electronicos/667dc1dd77b70f342b0759aa)
+  PUT [http://localhost:3000/electronicos/:id](http://localhost:3000/electronicos/6667dc1dd77b70f342b0759aa)
   Content-Type: application/json
   {
+  "codigo": "codigo",
   "nombre": "Producto Actualizado",
-  "descripcion": "Nueva descripción del producto",
-  "categoria": "Electrónicos",
-  "precio": 449.99
+  "precio": 449.99,
+  "categorias": "Electrónicos"  
   }
 
 * DELETE /electronicos/
   Elimina un producto por su ID.
-  DELETE [http://localhost:3000/electronicos/:id](http://localhost:3000/electronicos/667dc19277b70f342b0759a7)
+  DELETE [http://localhost:3000/electronicos/:id](http://localhost:3000/electronicos/6688621eeefa83b6ecfec266)
 
 * GET /electronicos/nombre/
   Devuelve los productos con un nombre especificado.
@@ -79,7 +78,7 @@ GET [http://localhost:3000/electronicos/categoria/:categoria](http://localhost:3
 
 * GET /electronicos/codigo/
   Devuelve los productos con un importe menor al especificado.
-  GET [http://localhost:3000/electronicos/codigo/:codigo](http://localhost:3000/electronicos/codigo/25)
+  GET [http://localhost:3000/electronicos/codigo/:codigo](http://localhost:3000/electronicos/codigo/27)
 
 * GET /electronicos/precio/mayor/
   Devuelve todos los productos con precio mayor al especificado.
@@ -89,7 +88,3 @@ GET [http://localhost:3000/electronicos/categoria/:categoria](http://localhost:3
   Devuelve todos los productos con precio menor al especificado.
   GET [http://localhost:3000/electronicos/precio/menor/:precio](http://localhost:3000/electronicos/precio/menor/300)
 
-* GET /electronicos/categorias
-  /
-  Devuelve todas las categorias disponibles.
-  GET [http://localhost:3000/electronicos/categorias](http://localhost:3000/electronicos/categorias)

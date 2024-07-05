@@ -1,4 +1,4 @@
-MONGODB_URLSTRING = mongodb+srv://nefertaritheunique:vDB1mch6GUxIiZH8@dumpling.8dhyf0a.mongodb.net
+MONGODB_URLSTRING = mongodb+srv://nefertaritheunique:vDB1mch6GUxIiZH8@dumpling.8dhyf0a.mongodb.net/
 PORT = 3000
 DATABASE_NAME = productos
 COLLECTION_NAME = productos

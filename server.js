@@ -1,34 +1,16 @@
-const express = require('express')
-const app = express()
-const dotenv = require('dotenv');
-dotenv.config();
-const port = process.env.PORT ?? 3000
-const morgan = require('morgan')
-const mongoose = require('mongoose')
+const express = require('express');
+const app = express();
+const port = process.env.PORT ?? 3000;
+const morgan = require('morgan');
+const mongoose = require('mongoose');
+const Productos = require("./productos.js");
+const connectDB = require("./database.js");
+connectDB();
 
-
-//Obtener la URI desde las variables de entorno
-const URI = process.env.MONGODB_URLSTRING
-const DATABASE_NAME = process.env.DATABASE_NAME
-
-//Conectar a MongoDB usando Mongoose
-mongoose
-    .connect(URI + '/' + DATABASE_NAME)
-    .then(() => console.log('Conectado a MongoDB'))
-    .catch((err) => console.error(err))
-
-//Definir el esquema con el que va a trabajar Mongoose
-const productosSchema = new mongoose.Schema({
-    codigo: String,
-    nombre: String,
-    precio: Number,
-    categorias: [String]
-})
-const Productos = mongoose.model('productos', productosSchema)
 
 //Middleware
-app.use(express.json())
-app.use(morgan('dev'))
+app.use(express.json());
+app.use(morgan('dev'));
 
 //Ruta principal
 app.get('/', (req, res) => {
@@ -46,15 +28,15 @@ app.get('/electronicos', async (req, res) => {
 })
 
 // Ruta para mostrar los productos de una categoria
-app.get("/electronicos/:nombre", async (req, res) => {
-    const { categorias } = req.query;
-    const query = !categorias
-        ? {}
-        : { categorias: { $regex: categorias, $options: "i" } };
+app.get("/electronicos/categorias/:categoria", async (req, res) => {
+    const { categoria } = req.params;
+    const query = categoria
+        ? { categorias: { $regex: categoria, $options: "i" } }
+        : {};
     try {
-        const categorias = await Productos.find(query);
-        Productos
-            ? res.json(Productos)
+        const productos = await Productos.find(query);
+        productos.length > 0
+            ? res.json(productos)
             : res.status(404).json({ message: "No se encontraron productos" });
     } catch (error) {
         res.status(500).send("Error al buscar los productos");
@@ -72,7 +54,7 @@ app.get("/electronicos/:id", async (req, res) => {
 });
 
 //Ruta para crear un nuevo producto
-app.post("/electronicos", async (req, res) => {
+app.post("/electronicos/", async (req, res) => {
     const nuevoProducto = new Productos(req.body);
     try {
         await nuevoProducto.save();
@@ -167,19 +149,16 @@ app.get("/electronicos/nombre/:nombre", async (req, res) => {
 
 //Devuelve productos que coinciden con el codigo especificado (busqueda parcial)
 app.get("/electronicos/codigo/:codigo", async (req, res) => {
-    const { codigo } = req.params;
+    const codigo = parseFloat(req.params.codigo);
     try {
-        const codigoBuscado = await Productos.find({
-            codigo: new RegExp(codigo, "i"),
-        });
-        codigoBuscado
-            ? res.json(codigoBuscado)
-            : res.status(404).json({ message: "Error al buscar el producto" });
+        const products = await Productos.find({ codigo });
+        products
+            ? res.json(products)
+            : res.status(404).json({ message: "Error al encontrar el codigo" });
     } catch (error) {
-        res.status(500).json({ message: "Error al buscar el producto" });
+        res.status(500).json({ message: "Error al encontrar el codigo" });
     }
 });
-
 //Devuelve productos con un precio mayor al especificado
 app.get("/electronicos/precio/mayor/:precio", async (req, res) => {
     const precio = parseFloat(req.params.precio);
@@ -206,19 +185,6 @@ app.get("/electronicos/precio/menor/:precio", async (req, res) => {
     }
 });
 
-//Devuelve una lista de todas las categorias disponibles
-app.get("/electronicos/categorias", async (req, res) => {
-    try {
-        const categorias = await Productos.distinct('categoria');
-        categorias
-            ? res.json(categorias)
-            : res.status(404).json({ message: "Error al buscar las categorias de productos" });
-    } catch (error) {
-        res
-            .status(500)
-            .json({ message: "Error al encontrar las categorias de productos" });
-    }
-});
 
 //Error 404
 app.use((req, res, next) => {
