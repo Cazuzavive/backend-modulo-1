@@ -27,7 +27,7 @@ PATCH  http://localhost:3000/electronicos/667dc1dd77b70f342b0759aa
 content-type: application/json
 
 {
-    "precio": 20000
+    "precio": 20001
 }
 
 ### Actualizar un producto totalmente
