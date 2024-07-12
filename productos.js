@@ -8,20 +8,5 @@ const productosSchema = new mongoose.Schema({
     categorias: [String]
 });
 const Productos = mongoose.model('productos', productosSchema);
+
 module.exports = Productos;
-
-//Validar productos
-function validarProducto(campos) {
-    return productosSchema.safeParce(campos)
-}
-
-//Validar producto parcialmente
-
-function validarProductoParcial(campos) {
-    return productosSchema.partialValidate().safeParce(campos)
-}
-
-module.exports = {
-    validarProducto, validarProductoParcial,
-}
-

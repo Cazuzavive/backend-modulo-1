@@ -5,7 +5,7 @@ http://localhost:3000
 GET http://localhost:3000/electronicos
 
 ### Mostrar los productos de una categoria
-GET http://localhost:3000/electronicos/categorias/Hogar
+GET http://localhost:3000/electronicos/categorias/Electrónica
 
 ### Mostrar un producto por id
 GET http://localhost:3000/electronicos/6679dba4bdcfc3e1a47a9472
@@ -16,10 +16,10 @@ POST http://localhost:3000/electronicos/
 Content-Type: application/json
 
 {
-    "codigo": 58,
-    "nombre": "Telefono",
-    "precio": 3060,
-    "categorias": "Electronica"
+    "codigo": 603,
+    "nombre": "Tele",
+    "precio": 3040,
+    "categorias": ["Electrónica"]
 }
 
 ### Actualizar un producto parcialmente
@@ -27,7 +27,7 @@ PATCH  http://localhost:3000/electronicos/667dc1dd77b70f342b0759aa
 content-type: application/json
 
 {
-    "precio": 20001
+    "precio": 20000
 }
 
 ### Actualizar un producto totalmente

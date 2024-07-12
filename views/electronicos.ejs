@@ -1,0 +1,14 @@
+<%- include('partials/head') %>
+    <main><a href="/">Volver</a>
+        <h2>Nuestros articulos electronicos</h2>
+        <section>
+            <ul>
+                <% for (let i=0; i< products.length; i++) { %>
+                    <li>
+                        <%= products[i].nombre%> - $ <%=products[i].precio %>
+                    </li>
+                    <% } %>
+            </ul>
+        </section>
+    </main>
+    <%- include('partials/footer') %>

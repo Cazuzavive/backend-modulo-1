@@ -5,8 +5,6 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 const Productos = require("./productos.js");
 const connectDB = require("./database.js");
-const { validarProducto, validarProductoParcialmente } = require("./productos.js");
-const data = require("./data.js")
 connectDB();
 
 
@@ -66,11 +64,8 @@ app.post("/electronicos/", async (req, res) => {
     }
 });
 
-//Ruta para actualizar un producto parcialmente.
+//Ruta para actualizar un producto parcialmente
 app.patch("/electronicos/:id", async (req, res) => {
-    const resultado = Productos.validarProductoParcial(req.body)
-    if (!resultado.success) return res.status(400).json(resultado.error.message)
-
     const { id } = req.params;
     try {
         const productoModificado = await Productos.findByIdAndUpdate(id, req.body, {
@@ -92,13 +87,10 @@ app.patch("/electronicos/:id", async (req, res) => {
             .status(500)
             .json({ message: "Hubo un error al modificar el producto" });
     }
-    Productos[productoModificado] = { ...Productos[productoModificado], ...resultado.data }
-    res.json({ message: 'Producto modificado con exito', ...Productos[productoModificado] })
 });
 
-//Ruta para actualizar un producto totalmente. FALTA AGREGAR VALIDACION
+//Ruta para actualizar un producto totalmente
 app.put("/electronicos/:id", async (req, res) => {
-
     const { id } = req.params;
     try {
         const productoModificado = await Productos.findByIdAndUpdate(id, req.body, {

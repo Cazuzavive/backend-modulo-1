@@ -1,0 +1,16 @@
+<%- include('partials/head') %>
+    <main>
+        <a href="/">Volver al inicio</a>
+        <h2>Formulario de Contacto</h2>
+        <form>
+            <label for="name">Nombre</label>
+            <input type="text" id="name" name="Nombre" />
+            <label for="email">Correo electronico</label>
+            <input type="email" id="email" name="Correo electronico" />
+            <label for="message">Mensaje:</label>
+            <textarea name="message" id="message" rows="6" cols="50"></textarea>
+            <input type="submit" value="Enviar" />
+        </form>
+
+    </main>
+    <%- include('partials/footer') %>
